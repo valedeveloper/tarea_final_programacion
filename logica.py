@@ -49,19 +49,7 @@ class Recetario:
             print("No hay registros disponibles.")
             return pd.DataFrame(columns=self.campos)
         
-    def ver_receta_especifico(self, id):
-        """Devuelve una receta por su número (id)."""
-        recetas = self.mostrar_recetas()
-        resultado = recetas[recetas['id'] == id]
-        print(resultado,"Es errado")
-        if not resultado.empty:
-            receta = resultado.iloc[0]  
-            print("La receta en específico:", receta)
-            return receta
-        else:
-            print("ID no existe.")
-            return None
-        
+
     def eliminar_receta_por_id(self, id_eliminar):
         recetas = self.mostrar_recetas()
         if id_eliminar in recetas['id'].values:
@@ -81,7 +69,6 @@ class Recetario:
 
         with open(self.archivo, 'a', newline='', encoding='utf-8') as f:
             escritor = csv.DictWriter(f, fieldnames=self.campos)
-            
             if escribir_header:
                 escritor.writeheader()
             
@@ -89,4 +76,7 @@ class Recetario:
                 escritor.writerow(fila.to_dict())
         return recetas
 
- 
+    def buscar_por_nombre(self, texto):
+        df = self.mostrar_recetas()
+        return df[df['nombre'].str.contains(texto, case=False, na=False)]
+    
