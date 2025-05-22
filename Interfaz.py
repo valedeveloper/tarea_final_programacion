@@ -20,13 +20,13 @@ def agregar_receta():
     temperatura_str = entry_temperatura.get()
     if not nombre or not temperatura_str:
         messagebox.showinfo("Atención","Ingresa nombre y temperatura")
-        # text_area.insert(tk.END, "Ingresa nombre y temperatura\n")
         return
     try:
         celsius = int(temperatura_str)
     except ValueError:
         messagebox.showinfo("Atención","Temperatura debe ser un número")
         return
+    
     text_area.delete("1.0", "end")         
     recetario.agregar_receta(nombre, celsius)
     messagebox.showinfo("Atención","Receta añadida")
@@ -41,7 +41,6 @@ def eliminar_receta():
     try:
         id_objetivo = int(entry_numero.get())
         receta_eliminada = recetario.eliminar_receta_por_id(id_objetivo)
-        
         if receta_eliminada:
             text_area.delete("1.0", "end") 
             messagebox.showinfo("Atención","Receta Eliminada")
@@ -104,20 +103,16 @@ entry_numero = tk.Entry(base)
 entry_numero.grid(row=1, column=1, padx=5)
 
 tk.Button(base, text="Eliminar Receta", bg="#FF7F7F", command=eliminar_receta).grid(row=1, column=2, padx=5, pady=5)
-# tk.Button(base, text="Ver Receta por Número", bg="#FFD700", command=ver_receta_por_numero).grid(row=1, column=3, padx=5, pady=5)
 
 # Buscar por nombre
 tk.Label(base, text="Buscar receta por nombre:").grid(row=2, column=0, padx=5, pady=5)
-
 entry_busqueda_nombre = tk.Entry(base)
 entry_busqueda_nombre.grid(row=2, column=1, padx=5, pady=5)
-
 tk.Button(base, text="Buscar", bg="#6ECFFF", command=ver_receta_por_nombre).grid(row=2, column=2, padx=5, pady=5)
 
 # Mostrar recetas
 text_area = tk.Text(base, width=80, height=20)
 text_area.grid(row=3, column=0, columnspan=6, padx=10, pady=10)
-
 text_area.grid_propagate(False)
 
 # Mostrar recetas automáticamente al cargar

@@ -76,7 +76,7 @@ class Recetario:
                 escritor.writerow(fila.to_dict())
         return recetas
 
-    def buscar_por_nombre(self, texto):
+    def buscar_por_nombre(self, nombre):
         df = self.mostrar_recetas()
-        return df[df['nombre'].str.contains(texto, case=False, na=False)]
+        return df[df['nombre'].str.contains(nombre, case=False, na=False)]
     
