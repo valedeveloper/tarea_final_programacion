@@ -72,7 +72,7 @@ def eliminar_receta():
         # text_area.insert(tk.END, "Ingresa un número de ID válido\n")
 
 def actualizar_archivo():
-    df_recetas=recetario.actualizar_archivo
+    df_recetas=recetario.actualizar_archivo()
     text_area.insert(tk.END, df_recetas.to_string(index=False)) 
 
 # def guardar_archivo():
